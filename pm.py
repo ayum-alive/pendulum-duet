@@ -10,11 +10,11 @@ for tr,(prog) in enumerate([11,48,32]): m.addProgramChange(tr,tr,0,prog)
 dt=0.005
 for voice,(a0,tr,base) in enumerate([(2.0,0,57),(2.0001,1,57)]):
     s=np.array([a0,a0,0,0.]);t=0;last=None
-    for i in range(64):
+    for i in range(256):
         for _ in range(100):
             k1=f(s);k2=f(s+dt/2*k1);k3=f(s+dt/2*k2);k4=f(s+dt*k3);s=s+dt/6*(k1+2*k2+2*k3+k4)
         n=note(deg(s[1],0),base)
         m.addNote(tr,tr,n,i*0.5+ (voice*0.25),0.5 if tr==0 else 1.0,80 if tr==0 else 60)
 # bass pedal A and E, slow
-for b in range(16): m.addNote(2,2,[33,40,33,38][b%4],b*2,2,70)
+for b in range(64): m.addNote(2,2,[33,40,33,38][b%4],b*2,2,70)
 m.writeFile(open('pm.mid','wb'))
